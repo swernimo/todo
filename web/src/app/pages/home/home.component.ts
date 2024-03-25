@@ -17,7 +17,7 @@ import { AddListModalComponent } from '../../modals/add-list-modal/add-list-moda
 })
 export class HomeComponent implements OnInit {
 
-  public todoList = signal<ITodoList[]>([]);
+  public todoListArr = signal<ITodoList[]>([]);
 
   private addListDialogRef: MatDialogRef<AddListModalComponent, any> | null = null;
 
@@ -28,11 +28,10 @@ export class HomeComponent implements OnInit {
   }
 
   public getTodoLists(): void {
-    this.http.get<ITodoListGetResponse>(`${this.configSrv.apiUrl}/list`, {
-      headers: new HttpHeaders().append('Access-Control-Allow-Origin', 'true').append('Content-Type', 'application/json')
-    })
+    this.http.get<ITodoListGetResponse>(`${this.configSrv.apiUrl}/list`)
     .subscribe(r => {
-      this.todoList.set(r.todoList);
+      console.log();
+      this.todoListArr.set(r.todolist);
     });
   }
 

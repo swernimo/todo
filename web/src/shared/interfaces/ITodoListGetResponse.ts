@@ -1,7 +1,7 @@
 import ITodoList from "./ITodoList";
 
 export default interface ITodoGetResponse {
-    todoList: ITodoList[];
+    todolist: ITodoList[];
     totalItems: number;
     success: boolean;
 }

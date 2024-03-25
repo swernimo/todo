@@ -3,6 +3,24 @@
         <app-addbutton (addClicked)="addList()" tooltip="Add New List"></app-addbutton>
     </div>
     <div class="list">
-        <span>This is the where the list goes</span>
+        @if(todoListArr().length == 0) {
+            <span>Add Todo Lists by clicking the + button</span>
+        }
+        @for (list of todoListArr(); track $index) {
+            <div class="row">
+                <div class="listItem">
+                    <span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                    <span>{{ list.name }}</span>
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </div>
+            </div>
+        }
     </div>
 </div>

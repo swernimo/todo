@@ -18,5 +18,31 @@
     .list {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .listItem {
+                display: flex;
+                flex-direction: row;
+                width: 30vw;
+                justify-content: space-between;
+                height: 5vh;
+                align-items: center;
+                width: 50vw;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--background-hover);
+
+                    span {
+                        color: var(--white);
+                    }
+                }
+            }
+        }
     }
 }
