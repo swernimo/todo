@@ -18,7 +18,7 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    public TodoListGetResponse Get()
+    public IActionResult Get()
     {
       var list = _db.GetTodoList();
       TodoListGetResponse response = new()
@@ -27,7 +27,7 @@ namespace API.Controllers
         TotalItems = list.Count,
         Todolist = list
       };
-      return response;
+      return Ok(response);
     }
 
     [HttpPost] 
