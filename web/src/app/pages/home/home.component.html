@@ -4,7 +4,9 @@
     </div>
     <div class="list">
         @if(todoListArr().length == 0) {
-            <span>Add Todo Lists by clicking the + button</span>
+            <div class="noResults">
+                <span>Add Todo Lists by clicking the + button</span>
+            </div>
         }
         @for (list of todoListArr(); track $index) {
             <div class="row">

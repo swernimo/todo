@@ -21,8 +21,20 @@ namespace API.Shared
     }
 
     public bool DeleteList(string idToDelete) 
-    { 
-      throw new NotImplementedException();
+    {
+      if (string.IsNullOrEmpty(idToDelete))
+      {
+        return false;
+      }
+
+      TodoList list = _todos.Find(l => l.Id.ToString().Equals(idToDelete));
+      if (list == null)
+      {
+        return false;
+      }
+
+      _todos.Remove(list);
+      return true;
     }
   }
 }

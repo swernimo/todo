@@ -44,5 +44,10 @@
                 }
             }
         }
+
+        .noResults {
+            display: flex;
+            justify-content: center;
+        }
     }
 }

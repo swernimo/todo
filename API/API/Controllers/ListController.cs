@@ -46,5 +46,14 @@ namespace API.Controllers
       }
       return BadRequest();
     }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public IActionResult DeleteList(string id)
+    {
+      bool success = _db.DeleteList(id);
+      
+      return Ok(success);
+    }
   }
 }

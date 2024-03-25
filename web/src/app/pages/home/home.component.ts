@@ -61,6 +61,14 @@ export class HomeComponent implements OnInit {
   }
 
   public deleteList(id: string): void {
-    console.log(`Delete List with ID: ${id}`);
+    this.http.delete<boolean>(`${this.configSrv.apiUrl}/list/${id}`)
+    .subscribe({
+      next: (success) => {
+        console.log(`Delete List with ID: ${id}`);
+        if (success) {
+          this.getTodoLists();
+        }
+      }
+    });
   }
 }
