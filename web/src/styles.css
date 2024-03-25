@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --text-gray: #737370;
+    --white: #fff;
+    --branding-blue: #687BDF;
+    --required-blue: #1BD0E0;
+    --error-red: #E6180A;
+    --valid-green: #25EB13;
+    --background-gray: #E2E2E2;
+}
+
+body {
+    background-color: var(--background-gray);
+    
+    span, * {
+        color: var(--text-gray);
+    }
+}

@@ -21,7 +21,7 @@ namespace API.Controllers
     public TodoListGetResponse Get()
     {
       var list = _db.GetTodoList();
-      TodoListGetResponse response = new TodoListGetResponse()
+      TodoListGetResponse response = new()
       {
         Success = true,
         TotalItems = list.Count,
@@ -33,7 +33,7 @@ namespace API.Controllers
     [HttpPost] 
     public IActionResult CreateTodoList([FromBody]string name)
     {
-      TodoList newList = new TodoList()
+      TodoList newList = new()
       {
         Name = name,
         IsClosed = false,

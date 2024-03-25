@@ -1,0 +1,14 @@
+@import url('../styles.css');
+
+.header {
+    display: flex;
+    width: 99vw;
+    height: 15vh;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--branding-blue);
+
+    span {
+        color: var(--white);
+    }
+}
