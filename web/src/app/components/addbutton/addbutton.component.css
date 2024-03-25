@@ -1,0 +1,9 @@
+@import url('../../../styles.css');
+
+.wrapper {
+    span {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
