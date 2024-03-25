@@ -13,9 +13,7 @@
                         chevron_right
                     </span>
                     <span>{{ list.name }}</span>
-                    <span class="material-symbols-outlined">
-                        delete
-                    </span>
+                    <app-delete-button (deleteClicked)="deleteList(list.id)"></app-delete-button>
                     <span class="material-symbols-outlined">
                         edit
                     </span>

@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { AddbuttonComponent } from '../../components/addbutton/addbutton.component';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ConfigManagerService } from '../../services/config-manager.service';
 import ITodoListGetResponse from '../../../shared/interfaces/ITodoListGetResponse';
 import ITodoList from '../../../shared/interfaces/ITodoList';
 import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListModalComponent } from '../../modals/add-list-modal/add-list-modal.component';
+import { DeleteButtonComponent } from '../../components/delete-button/delete-button.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, AddbuttonComponent, MatDialogModule],
+  imports: [CommonModule, AddbuttonComponent, MatDialogModule, DeleteButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -57,5 +58,9 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+  }
+
+  public deleteList(id: string): void {
+    console.log(`Delete List with ID: ${id}`);
   }
 }
