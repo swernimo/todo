@@ -1,1 +1,3 @@
-<p>button works!</p>
+<div class="buttonWrapper">
+    <button (click)="buttonClicked()" [ngClass]="{primary: role === 'primary', secondary: role === 'secondary', cancel: role === 'cancel'}" [disabled]="disabled">{{text}}</button>
+</div>

@@ -3,4 +3,9 @@
 .addListModal {
     display: flex;
     flex-direction: column;
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+    }
 }

@@ -31,11 +31,11 @@ namespace API.Controllers
     }
 
     [HttpPost] 
-    public IActionResult CreateTodoList([FromBody]string name)
+    public IActionResult CreateTodoList([FromBody] TodoListCreateRequest createRequest)
     {
       TodoList newList = new()
       {
-        Name = name,
+        Name = createRequest.Name,
         IsClosed = false,
         Items = []
       };
