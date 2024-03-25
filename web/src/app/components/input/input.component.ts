@@ -23,8 +23,9 @@ export class InputComponent implements OnInit {
   @Input()
   public isRequired: boolean = false;
 
-  public isValid = computed(() => {
-    
+  public showIsValidIcon = computed(() => {
+    const touched = this.beenTouched();
+    return touched && this.isRequired && this.formCtrl.valid;
   });
 
   public beenTouched = signal<boolean>(false);

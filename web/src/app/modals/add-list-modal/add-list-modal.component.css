@@ -1,0 +1,6 @@
+@import url('../../../styles.css');
+
+.addListModal {
+    display: flex;
+    flex-direction: column;
+}
