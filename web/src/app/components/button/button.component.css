@@ -1,2 +1,9 @@
 @import url('../../../styles.css');
 
+.buttonWrapper {
+    button {
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+}

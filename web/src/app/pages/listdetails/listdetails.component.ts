@@ -77,7 +77,7 @@ export class ListdetailsComponent implements OnInit {
     }
 
     this.addItemDialogRef = this.dialog.open(AddListItemDetailsComponent, {
-      height: '300px',
+      height: '350px',
       width: '300px',
       data: {
         parentId: this.listId()

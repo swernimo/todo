@@ -1,8 +1,19 @@
 <div class="inputWrapper" [ngClass]="{required: isRequired}">
     @if(type === 'text') {
-        <input [placeholder]="placeholder" [type]="type" [formControl]="formCtrl"/>
+        <mat-form-field>
+            <mat-label>{{ title }}</mat-label>
+            <input matInput [placeholder]="placeholder" [formControl]="formCtrl">
+        </mat-form-field>
     } @else if (type === 'textarea') {
-    
+        <textarea [formControl]="formCtrl" [placeholder]="placeholder"></textarea>
+    } @else if (type === 'date') {
+        <mat-form-field>
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="formCtrl">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
     }
 
 </div>

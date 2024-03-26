@@ -1,1 +1,10 @@
-<p>add-list-item-details works!</p>
+<div class="wrapper">
+    <app-input placeholder="Child Name" [formCtrl]="nameCtrl" title="Child Name"></app-input>
+    <app-input placeholder="Due Date" type="date" [formCtrl]="dueDateCtrl" title="Due Date"></app-input>
+    <app-input placeholder="More Details" [formCtrl]="detailsCtrl" type="textarea" title="More Details"></app-input>
+
+    <div class="buttons">
+        <app-button role="cancel" text="Cancel" (btnClicked)="cancel()"></app-button>
+        <app-button role="primary" text="Save Child" [disabled]="!addForm.valid" (btnClicked)="saveChild()"></app-button>
+    </div>
+</div>
