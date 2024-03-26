@@ -13,7 +13,7 @@
         </div>
         <div class="buttons">
             <app-addbutton tooltip="Add Todo" (addClicked)="addChild()"></app-addbutton>
-            <app-editbutton></app-editbutton>
+            <app-editbutton tooltip="Edit List"></app-editbutton>
         </div>
     </div>
     <div class="tasks">
@@ -28,7 +28,7 @@
                         <mat-checkbox [checked]="item.isCompleted"></mat-checkbox>
                         <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
                         <app-addbutton tooltip="Add Child Task"></app-addbutton>
-                        <app-editbutton></app-editbutton>
+                        <app-editbutton tooltip="Edit Child Task"></app-editbutton>
                         <app-delete-button></app-delete-button>
                         @if(item.children?.length ?? 0 > 0) {
                             <div class="grandchildren">
