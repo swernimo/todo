@@ -1,0 +1,10 @@
+@import url('../../../styles.css');
+
+.editButtonWrapper {
+    span {
+        &:hover {
+            color: var(--white);
+            cursor: pointer;
+        }
+    }
+}

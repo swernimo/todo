@@ -8,6 +8,7 @@ import ITodoList from '../../../shared/interfaces/ITodoList';
 import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListModalComponent } from '../../modals/add-list-modal/add-list-modal.component';
 import { DeleteButtonComponent } from '../../components/delete-button/delete-button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   private addListDialogRef: MatDialogRef<AddListModalComponent, any> | null = null;
 
-  constructor(private http: HttpClient, private configSrv: ConfigManagerService, private dialog: MatDialog) {}
+  constructor(private http: HttpClient, private configSrv: ConfigManagerService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.getTodoLists();
@@ -81,5 +82,9 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+  }
+
+  public navigateToDetails(id: string): void {
+    this.router.navigateByUrl(`listdetails/${id}`);
   }
 }

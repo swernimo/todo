@@ -12,14 +12,12 @@
         @for (list of todoListArr(); track $index) {
             <div class="row">
                 <div class="listItem">
-                    <span class="material-symbols-outlined">
+                    <span class="material-symbols-outlined" (click)="navigateToDetails(list.id)">
                         chevron_right
                     </span>
-                    <span>{{ list.name }}</span>
+                    <span (click)="navigateToDetails(list.id)">{{ list.name }}</span>
                     <app-delete-button (deleteClicked)="deleteList(list.id)"></app-delete-button>
-                    <!-- <span class="material-symbols-outlined">
-                        edit
-                    </span> -->
+                    <!-- <app-delete-button></app-delete-button> -->
                 </div>
             </div>
         }
