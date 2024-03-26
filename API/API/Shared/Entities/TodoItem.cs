@@ -8,5 +8,6 @@
         public bool IsCompleted { get; set; } = false;
         public string Details { get; set; } = string.Empty;
         public List<TodoItem> Children { get; set; } = [];
+        public bool IsOverdue { get; set; } = false;
     }
 }

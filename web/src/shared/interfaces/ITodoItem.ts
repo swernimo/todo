@@ -5,4 +5,5 @@ export default interface ITodoItem {
     isCompleted: boolean;
     details?: string;
     children?: ITodoItem[];
+    isOverdue?: boolean;
 }

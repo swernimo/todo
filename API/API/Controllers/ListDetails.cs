@@ -27,6 +27,15 @@ namespace API.Controllers
         return NoContent();
       }
 
+      list.Items.ForEach(i =>
+      {
+        i.IsOverdue = (i.DueDate < DateTime.Today);
+        i.Children.ForEach(c =>
+        {
+           c.IsOverdue = c.DueDate < DateTime.Today;
+        });
+      });
+
       return Ok(list);
     }
 

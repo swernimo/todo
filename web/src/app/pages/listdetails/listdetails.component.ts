@@ -10,11 +10,12 @@ import { DeleteButtonComponent } from '../../components/delete-button/delete-but
 import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListItemDetailsComponent } from '../../modals/add-list-item-details/add-list-item-details.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listdetails',
   standalone: true,
-  imports: [EditbuttonComponent, AddbuttonComponent, MatCheckboxModule, DeleteButtonComponent, MatDialogModule, MatTooltipModule],
+  imports: [EditbuttonComponent, AddbuttonComponent, MatCheckboxModule, DeleteButtonComponent, MatDialogModule, MatTooltipModule, CommonModule],
   templateUrl: './listdetails.component.html',
   styleUrl: './listdetails.component.css'
 })

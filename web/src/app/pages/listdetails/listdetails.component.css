@@ -59,6 +59,10 @@
                     white-space: nowrap;
                     text-overflow: ellipsis;
                 }
+
+                &.overdue {
+                    background-color: var(--error-red);
+                }
             }
         }
     }
