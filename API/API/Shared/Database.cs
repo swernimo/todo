@@ -50,13 +50,24 @@ namespace API.Shared
 
     public bool SaveChildToList(AddChildRequest request)
     {
-      TodoList parent = this.GetTodo(request.ParentId);
+      TodoList parent = GetTodo(request.ParentId);
       if (parent == null)
       {
         return false;
       }
       parent.Items.Add(request.ChildToAdd);
       return true;
+    }
+
+    public bool DeleteChildTask(string childId)
+    {
+      TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id.ToString().Equals(childId)).Count() > 0).FirstOrDefault();
+      if(parentList != null)
+      {
+        int count = parentList.Items.RemoveAll(c => c.Id.ToString().Equals(childId));
+        return count > 0;
+      }
+      return false;
     }
   }
 }

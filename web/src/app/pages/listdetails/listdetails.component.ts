@@ -11,6 +11,7 @@ import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dial
 import { AddListItemDetailsComponent } from '../../modals/add-list-item-details/add-list-item-details.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
+import ITodoItem from '../../../shared/interfaces/ITodoItem';
 
 @Component({
   selector: 'app-listdetails',
@@ -97,4 +98,29 @@ export class ListdetailsComponent implements OnInit {
     });
   }
 
+  public deleteList(): void {
+    this.http.delete<boolean>(`${this.configSrv.apiUrl}/list/${this.listId()}`)
+    .subscribe({
+      next: (success) => {
+        if (success) {
+          this.goBack();
+        }
+      }
+    });
+  }
+
+  public deleteChildTask(childId: string, parentTask?: ITodoItem): void {
+    if (parentTask) {
+      //TODO: this is a grandchildren task
+    } else {
+      this.http.delete<boolean>(`${this.configSrv.apiUrl}/listdetails/deletechild/${childId}`)
+      .subscribe({
+        next: (success) => {
+          if (success) {
+            this.loadDetails();
+          }
+        }
+      })
+    }
+  }
 }

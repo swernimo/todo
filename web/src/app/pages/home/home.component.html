@@ -16,7 +16,7 @@
                         chevron_right
                     </span>
                     <span (click)="navigateToDetails(list.id)">{{ list.name }}</span>
-                    <app-delete-button (deleteClicked)="deleteList(list.id)"></app-delete-button>
+                    <app-delete-button (deleteClicked)="deleteList(list.id)" tooltip="Delete List"></app-delete-button>
                 </div>
             </div>
         }
