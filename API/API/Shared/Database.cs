@@ -16,6 +16,10 @@ namespace API.Shared
 
     public bool SaveList(TodoList list)
     {
+      if (string.IsNullOrEmpty(list.Id))
+      {
+        list.Id = Guid.NewGuid().ToString();
+      }
       _todos.Add(list);
       return true;
     }
@@ -27,7 +31,7 @@ namespace API.Shared
         return false;
       }
 
-      TodoList list = _todos.Find(l => l.Id.ToString().Equals(idToDelete));
+      TodoList list = _todos.Find(l => l.Id.Equals(idToDelete));
       if (list == null)
       {
         return false;
@@ -45,7 +49,7 @@ namespace API.Shared
 
     public TodoList GetTodo(string id)
     {
-      return _todos.Find(x => x.Id.ToString().Equals(id));
+      return _todos.Find(x => x.Id.Equals(id));
     }
 
     public bool SaveChildToList(AddChildRequest request)
@@ -55,16 +59,22 @@ namespace API.Shared
       {
         return false;
       }
+
+      if (string.IsNullOrEmpty(request.ChildToAdd.Id))
+      {
+        request.ChildToAdd.Id = Guid.NewGuid().ToString();
+      }
+
       parent.Items.Add(request.ChildToAdd);
       return true;
     }
 
     public bool DeleteChildTask(string childId)
     {
-      TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id.ToString().Equals(childId)).Count() > 0).FirstOrDefault();
+      TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id.Equals(childId)).Count() > 0).FirstOrDefault();
       if(parentList != null)
       {
-        int count = parentList.Items.RemoveAll(c => c.Id.ToString().Equals(childId));
+        int count = parentList.Items.RemoveAll(c => c.Id.Equals(childId));
         return count > 0;
       }
       return false;
@@ -79,7 +89,7 @@ namespace API.Shared
         for(var i = 0; i < parentList.Items.Count; i++)
         {
           var child = parentList.Items[i];
-          if (child.Id.ToString().Equals(item.Id.ToString()))
+          if (child.Id.Equals(item.Id))
           {
             parentList.Items[i] = item;
             success = true;
