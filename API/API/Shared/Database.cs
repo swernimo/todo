@@ -42,5 +42,10 @@ namespace API.Shared
       _todos.Clear();
       return true;
     }
+
+    public TodoList GetTodo(string id)
+    {
+      return _todos.Find(x => x.Id.ToString().Equals(id));
+    }
   }
 }

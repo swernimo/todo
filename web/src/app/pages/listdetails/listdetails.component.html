@@ -1,3 +1,11 @@
 <div class="detailsPageWrapper">
-    
+    <div class="header">
+        <span class="material-symbols-outlined icon" (click)="goBack()">
+            arrow_back
+        </span>
+        <div class="title">
+            <span>{{ listName() }}</span>
+        </div>
+        <app-editbutton></app-editbutton>
+    </div>
 </div>
