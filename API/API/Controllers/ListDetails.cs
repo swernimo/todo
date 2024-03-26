@@ -29,5 +29,16 @@ namespace API.Controllers
 
       return Ok(list);
     }
+
+    [HttpPost]
+    [Route("addChild")]
+    public IActionResult AddChild([FromBody] AddChildRequest request)
+    {
+      if (_db.SaveChildToList(request))
+      {
+        return Created("", request.ChildToAdd);
+      }
+      return BadRequest();
+    }
   }
 }

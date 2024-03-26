@@ -1,6 +1,6 @@
 ﻿namespace API.Shared.Entities
 {
-    public class TodoList
+    public record TodoList
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
         public List<TodoItem> Items { get; set; } = [];

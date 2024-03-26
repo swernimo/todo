@@ -47,5 +47,16 @@ namespace API.Shared
     {
       return _todos.Find(x => x.Id.ToString().Equals(id));
     }
+
+    public bool SaveChildToList(AddChildRequest request)
+    {
+      TodoList parent = this.GetTodo(request.ParentId);
+      if (parent == null)
+      {
+        return false;
+      }
+      parent.Items.Add(request.ChildToAdd);
+      return true;
+    }
   }
 }

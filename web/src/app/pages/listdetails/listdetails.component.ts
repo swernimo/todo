@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EditbuttonComponent } from '../../components/editbutton/editbutton.component';
 import ITodoList from '../../../shared/interfaces/ITodoList';
 import { ConfigManagerService } from '../../services/config-manager.service';
+import { AddbuttonComponent } from '../../components/addbutton/addbutton.component';
 
 @Component({
   selector: 'app-listdetails',
   standalone: true,
-  imports: [EditbuttonComponent],
+  imports: [EditbuttonComponent, AddbuttonComponent],
   templateUrl: './listdetails.component.html',
   styleUrl: './listdetails.component.css'
 })
@@ -22,6 +23,19 @@ export class ListdetailsComponent implements OnInit {
   public listId = signal<string>('');
 
   public list = signal<ITodoList | null>(null);
+
+  public isClosed = computed(() => {
+    const l = this.list();
+    if (l) {
+      return l.isClosed;
+    }
+    return false;
+  });
+
+  public showNoResults = computed(() => {
+    const l = this.list();
+    return l?.items.length == 0;
+  });
 
   constructor(private http: HttpClient, private router: Router, private currentRoute: ActivatedRoute, private configSrv: ConfigManagerService) {}
 
@@ -44,6 +58,10 @@ export class ListdetailsComponent implements OnInit {
 
   public goBack(): void {
     this.router.navigateByUrl('');
+  }
+
+  public addChild(): void {
+    console.log('Open Add Task Modal');
   }
 
 }

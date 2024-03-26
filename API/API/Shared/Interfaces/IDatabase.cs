@@ -9,5 +9,6 @@ namespace API.Shared.Interfaces
         bool DeleteList(string idToDelete);
         bool ClearAllLists();
         TodoList GetTodo(string id);
+        bool SaveChildToList(AddChildRequest request);
     }
 }

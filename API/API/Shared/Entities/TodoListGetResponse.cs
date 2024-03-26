@@ -1,6 +1,6 @@
 ﻿namespace API.Shared.Entities
 {
-  public class TodoListGetResponse
+  public record TodoListGetResponse
   {
     public List<TodoList> Todolist { get; set; } = [];
     public int TotalItems { get; set; } = 0;

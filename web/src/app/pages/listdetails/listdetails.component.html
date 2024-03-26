@@ -4,8 +4,39 @@
             arrow_back
         </span>
         <div class="title">
-            <span>{{ listName() }}</span>
+            <span>
+                {{ listName() }}
+                @if(isClosed()) {
+                    (closed)
+                }
+            </span>
         </div>
-        <app-editbutton></app-editbutton>
+        <div class="buttons">
+            <app-addbutton tooltip="Add Todo" (addClicked)="addChild()"></app-addbutton>
+            <app-editbutton></app-editbutton>
+        </div>
+    </div>
+    <div class="tasks">
+        @if (showNoResults()) {
+            <div class="noResults">
+                <span>Todo List Contains no items. Add some with +.</span>
+            </div>
+        } @else {
+            <!--TODO: make table of items-->
+            <div class="table">
+                @for (item of list()?.items; track $index) {
+                    <div class="row">
+                        <!--checkbox-->
+                        <!--task name-->
+                        <!--add child button-->
+                        <!--edit button-->
+                        <!--delete task (and children)-->
+                        @if(item.children?.length ?? 0 > 0) {
+
+                        }
+                    </div>
+                }
+            </div>
+        }
     </div>
 </div>

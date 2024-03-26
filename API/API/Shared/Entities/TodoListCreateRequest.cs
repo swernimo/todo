@@ -1,6 +1,6 @@
 ﻿namespace API.Shared.Entities
 {
-  public class TodoListCreateRequest
+  public record TodoListCreateRequest
   {
     public string Name { get; set; } = string.Empty;
   }
