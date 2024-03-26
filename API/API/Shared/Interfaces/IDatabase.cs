@@ -11,5 +11,6 @@ namespace API.Shared.Interfaces
         TodoList GetTodo(string id);
         bool SaveChildToList(AddChildRequest request);
         bool DeleteChildTask(string childId);
+        bool UpdateChildTask(TodoItem item);
   }
 }

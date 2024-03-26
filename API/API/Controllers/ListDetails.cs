@@ -57,5 +57,13 @@ namespace API.Controllers
       bool success = _db.DeleteChildTask(id);
       return Ok(success);
     }
+
+    [HttpPut]
+    [Route("updateChild")]
+    public IActionResult UpdateChild([FromBody]TodoItem item)
+    {
+      bool success = _db.UpdateChildTask(item);
+      return Ok(success);
+    }
   }
 }

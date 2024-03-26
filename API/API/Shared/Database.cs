@@ -69,5 +69,27 @@ namespace API.Shared
       }
       return false;
     }
+
+    public bool UpdateChildTask(TodoItem item)
+    {
+      TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id == item.Id).Count() > 0).FirstOrDefault();
+      bool success = false;
+      if (parentList != null)
+      {
+        for(var i = 0; i < parentList.Items.Count; i++)
+        {
+          var child = parentList.Items[i];
+          if (child.Id.ToString().Equals(item.Id.ToString()))
+          {
+            parentList.Items[i] = item;
+            success = true;
+            break;
+          }
+        }
+
+      }
+
+      return success;
+    }
   }
 }
