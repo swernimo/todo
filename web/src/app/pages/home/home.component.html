@@ -1,6 +1,7 @@
 <div class="wrapper">
     <div class="add">
         <app-addbutton (addClicked)="addList()" tooltip="Add New List"></app-addbutton>
+        <app-delete-button (deleteClicked)="deleteAllLists()" tooltip="Delete All Lists"></app-delete-button>
     </div>
     <div class="list">
         @if(todoListArr().length == 0) {
@@ -16,9 +17,9 @@
                     </span>
                     <span>{{ list.name }}</span>
                     <app-delete-button (deleteClicked)="deleteList(list.id)"></app-delete-button>
-                    <span class="material-symbols-outlined">
+                    <!-- <span class="material-symbols-outlined">
                         edit
-                    </span>
+                    </span> -->
                 </div>
             </div>
         }

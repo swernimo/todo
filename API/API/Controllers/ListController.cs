@@ -42,7 +42,7 @@ namespace API.Controllers
       var success = _db.SaveList(newList);
       if (success)
       {
-        return Created($"details/{newList.Id}", newList);
+        return Created($"listdetails/{newList.Id}", newList);
       }
       return BadRequest();
     }
@@ -53,6 +53,14 @@ namespace API.Controllers
     {
       bool success = _db.DeleteList(id);
       
+      return Ok(success);
+    }
+
+    [HttpDelete]
+    [Route("deleteall")]
+    public IActionResult ClearAll()
+    {
+      bool success = _db.ClearAllLists();
       return Ok(success);
     }
   }

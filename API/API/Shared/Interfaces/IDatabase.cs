@@ -7,5 +7,6 @@ namespace API.Shared.Interfaces
         List<TodoList> GetTodoList();
         bool SaveList(TodoList list);
         bool DeleteList(string idToDelete);
+        bool ClearAllLists();
     }
 }

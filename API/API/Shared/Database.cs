@@ -36,5 +36,11 @@ namespace API.Shared
       _todos.Remove(list);
       return true;
     }
+
+    public bool ClearAllLists()
+    {
+      _todos.Clear();
+      return true;
+    }
   }
 }

@@ -4,6 +4,7 @@
     span {
         &:hover {
             cursor: pointer;
+            color: var(--white);
         }
     }
 }

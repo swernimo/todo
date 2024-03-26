@@ -71,4 +71,15 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  public deleteAllLists(): void {
+    this.http.delete<boolean>(`${this.configSrv.apiUrl}/list/deleteall`)
+    .subscribe({
+      next: (success) => {
+        if (success) {
+          this.getTodoLists();
+        }
+      }
+    });
+  }
 }

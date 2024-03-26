@@ -3,9 +3,15 @@
 .addListModal {
     display: flex;
     flex-direction: column;
+    align-self: center;
+
+    div {
+        height: 3.5vh;
+    }
 
     .footer {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
     }
 }

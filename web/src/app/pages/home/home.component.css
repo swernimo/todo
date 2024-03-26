@@ -9,9 +9,11 @@
         display: flex;
         width: 100%;
         justify-content: end;
+        margin-right: 1.5vw;
+        align-content: space-between;
 
-        app-addbutton {
-            margin-right: 1.5vw;
+        * {
+            margin-right: 1vw;
         }
     }
 
