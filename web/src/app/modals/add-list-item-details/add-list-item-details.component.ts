@@ -1,9 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../components/button/button.component';
 import { InputComponent } from '../../components/input/input.component';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { ConfigManagerService } from '../../services/config-manager.service';
+import ITodoListAddChildRequest from '../../../shared/interfaces/ITodoListAddChildRequest';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-list-item-details',
@@ -14,16 +18,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddListItemDetailsComponent implements OnInit {
 
-    @Input()
-    public parentId: string = '';
-
     public addForm: FormGroup = this.formBuilder.group({
       name: new FormControl(null, [Validators.required]),
       details: new FormControl(null),
-      dueDate: new FormControl(null, [Validators.required])
+      dueDate: new FormControl(null, [Validators.required]),
+      parentId: new FormControl(this.data.parentId, [Validators.required])
     });
 
-    constructor(private formBuilder: FormBuilder, private dialog: MatDialog) { }
+    constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private http: HttpClient, private configSrv: ConfigManagerService, @Inject(MAT_DIALOG_DATA) public data: {parentId: string}) { }
 
     get nameCtrl(): FormControl {
       return this.addForm.get('name') as FormControl;
@@ -42,7 +44,26 @@ export class AddListItemDetailsComponent implements OnInit {
     }
 
     public saveChild(): void {
-      const dialog = this.dialog.openDialogs[0];
+      const request: ITodoListAddChildRequest = {
+        parentId: this.data.parentId,
+        childToAdd: {
+          children: [],
+          isCompleted: false,
+          dueDate: this.dueDateCtrl.value,
+          name: this.nameCtrl.value,
+          details: this.detailsCtrl.value ?? '',
+          id: ''
+        }
+      }
+      this.http.post<ITodoListAddChildRequest>(`${this.configSrv.apiUrl}/listdetails/addchild`, request)
+      .subscribe((response) => {
+        const dialog = this.dialog.openDialogs[0];
+        if (response) {
+          dialog.close(true);
+        } else {
+          dialog.close(false);
+        }
+      });
     }
 
     public cancel(): void {

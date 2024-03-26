@@ -50,21 +50,25 @@ export class ListdetailsComponent implements OnInit {
       this.currentRoute.params.subscribe((p) => {
         if (p['id']) {
           this.listId.set(p['id']);
-          this.http.get<ITodoList>(`${this.configSrv.apiUrl}/listdetails/${this.listId()}`)
-          .subscribe({
-            next: (r) => {
-              if (r) {
-                this.list.set(r);
-              } else {
-                this.goBack();
-              }
-            }
-          });
+          this.loadDetails();
         } else {
           //TODO: log the error
           this.goBack();
         }
       });
+  }
+
+  public loadDetails(): void {
+    this.http.get<ITodoList>(`${this.configSrv.apiUrl}/listdetails/${this.listId()}`)
+    .subscribe({
+      next: (r) => {
+        if (r) {
+          this.list.set(r);
+        } else {
+          this.goBack();
+        }
+      }
+    });
   }
 
   public goBack(): void {
@@ -75,12 +79,19 @@ export class ListdetailsComponent implements OnInit {
     if (this.addItemDialogRef) {
       this.addItemDialogRef.close();
     }
-
+    const id = this.listId();
     this.addItemDialogRef = this.dialog.open(AddListItemDetailsComponent, {
       height: '350px',
       width: '300px',
       data: {
         parentId: this.listId()
+      }
+    });
+
+    this.addItemDialogRef.afterClosed()
+    .subscribe((refresh) => {
+      if (refresh) {
+        this.loadDetails();
       }
     });
   }
