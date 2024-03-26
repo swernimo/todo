@@ -26,7 +26,7 @@
             <div class="table">
                 @for (item of list()?.items; track $index) {
                     <div class="row" [ngClass]="{ overdue: item.isOverdue }">
-                        <mat-checkbox [checked]="item.isCompleted"></mat-checkbox>
+                        <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
                         <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
                         <app-addbutton tooltip="Add Child Task"></app-addbutton>
                         <app-editbutton tooltip="Edit Child Task"></app-editbutton>

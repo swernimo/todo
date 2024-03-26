@@ -123,4 +123,12 @@ export class ListdetailsComponent implements OnInit {
       })
     }
   }
+
+  public completeChanged(todoItem: ITodoItem): void {
+    todoItem.isCompleted = !todoItem.isCompleted;
+    this.http.put<boolean>(`${this.configSrv.apiUrl}/listdetails/updateChild`, todoItem)
+    .subscribe({
+      next: (success) => {}
+    });
+  }
 }
