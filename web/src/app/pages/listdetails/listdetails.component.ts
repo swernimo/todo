@@ -5,11 +5,16 @@ import { EditbuttonComponent } from '../../components/editbutton/editbutton.comp
 import ITodoList from '../../../shared/interfaces/ITodoList';
 import { ConfigManagerService } from '../../services/config-manager.service';
 import { AddbuttonComponent } from '../../components/addbutton/addbutton.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DeleteButtonComponent } from '../../components/delete-button/delete-button.component';
+import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddListItemDetailsComponent } from '../../modals/add-list-item-details/add-list-item-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-listdetails',
   standalone: true,
-  imports: [EditbuttonComponent, AddbuttonComponent],
+  imports: [EditbuttonComponent, AddbuttonComponent, MatCheckboxModule, DeleteButtonComponent, MatDialogModule, MatTooltipModule],
   templateUrl: './listdetails.component.html',
   styleUrl: './listdetails.component.css'
 })
@@ -37,16 +42,22 @@ export class ListdetailsComponent implements OnInit {
     return l?.items.length == 0;
   });
 
-  constructor(private http: HttpClient, private router: Router, private currentRoute: ActivatedRoute, private configSrv: ConfigManagerService) {}
+  public addItemDialogRef: MatDialogRef<AddListItemDetailsComponent, any> | null = null;
+
+  constructor(private http: HttpClient, private router: Router, private currentRoute: ActivatedRoute, private configSrv: ConfigManagerService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
       this.currentRoute.params.subscribe((p) => {
         if (p['id']) {
           this.listId.set(p['id']);
           this.http.get<ITodoList>(`${this.configSrv.apiUrl}/listdetails/${this.listId()}`)
-          .subscribe((r) => {
-            if (r) {
-              this.list.set(r);
+          .subscribe({
+            next: (r) => {
+              if (r) {
+                this.list.set(r);
+              } else {
+                this.goBack();
+              }
             }
           });
         } else {
@@ -61,7 +72,17 @@ export class ListdetailsComponent implements OnInit {
   }
 
   public addChild(): void {
-    console.log('Open Add Task Modal');
+    if (this.addItemDialogRef) {
+      this.addItemDialogRef.close();
+    }
+
+    this.addItemDialogRef = this.dialog.open(AddListItemDetailsComponent, {
+      height: '300px',
+      width: '300px',
+      data: {
+        parentId: this.listId()
+      }
+    });
   }
 
 }

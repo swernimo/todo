@@ -35,5 +35,23 @@
             display: flex;
             justify-content: center;
         }
+
+        .table {
+            display: flex;
+
+            .row {
+                display: flex;  
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+                width: 50vw;
+                margin-left: 30vw;
+
+                .grandchildren {
+                    display: flex;
+                    flex-direction: row;
+                }
+            }
+        }
     }
 }

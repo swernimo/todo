@@ -22,17 +22,20 @@
                 <span>Todo List Contains no items. Add some with +.</span>
             </div>
         } @else {
-            <!--TODO: make table of items-->
             <div class="table">
                 @for (item of list()?.items; track $index) {
                     <div class="row">
-                        <!--checkbox-->
-                        <!--task name-->
-                        <!--add child button-->
-                        <!--edit button-->
-                        <!--delete task (and children)-->
+                        <mat-checkbox [checked]="item.isCompleted"></mat-checkbox>
+                        <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
+                        <app-addbutton tooltip="Add Child Task"></app-addbutton>
+                        <app-editbutton></app-editbutton>
+                        <app-delete-button></app-delete-button>
                         @if(item.children?.length ?? 0 > 0) {
+                            <div class="grandchildren">
+                                @for (grandchild of item.children; track $index) {
 
+                                }
+                            </div>
                         }
                     </div>
                 }
