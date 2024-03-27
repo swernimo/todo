@@ -12,11 +12,13 @@ import { AddListItemDetailsComponent } from '../../modals/add-list-item-details/
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import ITodoItem from '../../../shared/interfaces/ITodoItem';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { InputComponent } from '../../components/input/input.component';
 
 @Component({
   selector: 'app-listdetails',
   standalone: true,
-  imports: [EditbuttonComponent, AddbuttonComponent, MatCheckboxModule, DeleteButtonComponent, MatDialogModule, MatTooltipModule, CommonModule],
+  imports: [EditbuttonComponent, AddbuttonComponent, MatCheckboxModule, DeleteButtonComponent, MatDialogModule, MatTooltipModule, CommonModule, InputComponent],
   templateUrl: './listdetails.component.html',
   styleUrl: './listdetails.component.css'
 })
@@ -46,7 +48,17 @@ export class ListdetailsComponent implements OnInit {
 
   public addItemDialogRef: MatDialogRef<AddListItemDetailsComponent, any> | null = null;
 
-  constructor(private http: HttpClient, private router: Router, private currentRoute: ActivatedRoute, private configSrv: ConfigManagerService, private dialog: MatDialog) {}
+  public editMode = signal<boolean>(false);
+
+  public listForm: FormGroup = this.formBuilder.group({
+    listName: new FormControl<string>(this.listName(), [Validators.required])
+  });
+
+  constructor(private http: HttpClient, private router: Router, private currentRoute: ActivatedRoute, private configSrv: ConfigManagerService, private dialog: MatDialog, private formBuilder: FormBuilder) {}
+
+  get listNameCtrl(): FormControl {
+    return this.listForm.get('listName') as FormControl;
+  }
 
   ngOnInit(): void {
       this.currentRoute.params.subscribe((p) => {
@@ -162,6 +174,23 @@ export class ListdetailsComponent implements OnInit {
   }
 
   public editList(): void {
-    console.log('edit list');
+    this.listNameCtrl.setValue(this.listName());
+    this.editMode.set(true);
+  }
+
+  public listNameBlur(): void {
+    this.editMode.set(false);
+    if (this.list()) {
+      //@ts-ignore
+      this.list().name = this.listNameCtrl.value;
+      this.http.put<boolean>(`${this.configSrv.apiUrl}/list`, this.list())
+      .subscribe({
+        next: (success) => {
+          if (success) {
+            this.loadDetails();
+          }
+        }
+      });
+    }
   }
 }

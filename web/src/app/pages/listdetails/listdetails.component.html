@@ -4,12 +4,16 @@
             arrow_back
         </span>
         <div class="title">
-            <span>
-                {{ listName() }}
-                @if(isClosed()) {
-                    (closed)
-                }
-            </span>
+            @if(editMode()) {
+                <app-input type="text" [formCtrl]="listNameCtrl" title="List Name" [inline]="true" (inputBlur)="listNameBlur()"></app-input>
+            } @else {
+                <span>
+                    {{ listName() }}
+                    @if(isClosed()) {
+                        (closed)
+                    }
+                </span>
+            }
         </div>
         <div class="buttons">
             <app-addbutton tooltip="Add Todo" (addClicked)="addChild()"></app-addbutton>

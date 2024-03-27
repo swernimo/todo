@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, computed, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -29,6 +29,12 @@ export class InputComponent implements OnInit {
   @Input({required: true})
   public title: string = '';
 
+  @Input()
+  public inline: boolean = false;
+
+  @Output()
+  public inputBlur: EventEmitter<void> = new EventEmitter();
+
   public showIsValidIcon = computed(() => {
     const touched = this.beenTouched();
     return touched && this.isRequired && this.formCtrl.valid;
@@ -40,5 +46,9 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
       
+  }
+
+  public inputOnBlur(): void {
+    this.inputBlur.emit();
   }
 }
