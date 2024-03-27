@@ -80,7 +80,14 @@ namespace API.Shared
     public bool DeleteChildTask(string childId)
     {
       TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id.Equals(childId)).Count() > 0).FirstOrDefault();
-      if(parentList != null)
+      if(parentList == null)
+      {
+        parentList = GetTodoList().Where(l => l.Items.Where(c => c.Children.Where(g => g.Id.Equals(childId)).Any()).Any()).FirstOrDefault();
+        TodoItem parentItem = parentList.Items.Where(i => i.Children.Where(c => c.Id.Equals(childId)).Any()).First();
+        int index = parentItem.Children.FindIndex(c => c.Id.Equals(childId));
+        parentItem.Children.RemoveAt(index);
+        return true;
+      } else
       {
         int count = parentList.Items.RemoveAll(c => c.Id.Equals(childId));
         return count > 0;

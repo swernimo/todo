@@ -77,16 +77,18 @@ export class ListdetailsComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  public addChild(): void {
+  public addChild(id?: string): void {
     if (this.addItemDialogRef) {
       this.addItemDialogRef.close();
     }
-    const id = this.listId();
+
+    id = id ?? this.listId();
+    
     this.addItemDialogRef = this.dialog.open(AddListItemDetailsComponent, {
       height: '350px',
       width: '300px',
       data: {
-        parentId: this.listId()
+        parentId: id
       }
     });
 
@@ -109,19 +111,15 @@ export class ListdetailsComponent implements OnInit {
     });
   }
 
-  public deleteChildTask(childId: string, parentTask?: ITodoItem): void {
-    if (parentTask) {
-      //TODO: this is a grandchildren task
-    } else {
-      this.http.delete<boolean>(`${this.configSrv.apiUrl}/listdetails/deletechild/${childId}`)
-      .subscribe({
-        next: (success) => {
-          if (success) {
-            this.loadDetails();
-          }
+  public deleteChildTask(childId: string): void {
+    this.http.delete<boolean>(`${this.configSrv.apiUrl}/listdetails/deletechild/${childId}`)
+    .subscribe({
+      next: (success) => {
+        if (success) {
+          this.loadDetails();
         }
-      })
-    }
+      }
+    });
   }
 
   public completeChanged(todoItem: ITodoItem): void {
@@ -131,7 +129,11 @@ export class ListdetailsComponent implements OnInit {
     }
     this.http.put<boolean>(`${this.configSrv.apiUrl}/listdetails/updateChild`, todoItem)
     .subscribe({
-      next: (success) => {}
+      next: (success) => {
+        if (success) {
+          this.loadDetails();
+        }
+      }
     });
   }
 }

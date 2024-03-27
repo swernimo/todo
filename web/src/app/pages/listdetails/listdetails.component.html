@@ -30,9 +30,9 @@
                             <div class="column">
                                 <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
                                 <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
-                                <app-addbutton tooltip="Add Child Task"></app-addbutton>
-                                <app-editbutton tooltip="Edit Child Task"></app-editbutton>
-                                <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
+                                <app-addbutton tooltip="Add Child Task" (addClicked)="addChild(item.id)"></app-addbutton>
+                                <app-editbutton tooltip="Edit Task"></app-editbutton>
+                                <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
                             </div>
                             @if(item.children?.length ?? 0 > 0) {
                                 <div class="grandchildren">
@@ -41,8 +41,8 @@
                                         <div class="column">
                                             <mat-checkbox [checked]="grandchild.isCompleted" (change)="completeChanged(grandchild)"></mat-checkbox>
                                             <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
-                                            <app-editbutton tooltip="Edit Child Task"></app-editbutton>
-                                            <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(grandchild.id, item)"></app-delete-button>
+                                            <app-editbutton tooltip="Edit Task"></app-editbutton>
+                                            <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(grandchild.id)"></app-delete-button>
                                         </div>
                                     }
                                 </div>
