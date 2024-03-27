@@ -26,21 +26,28 @@
             <div class="table">
                 @for (item of list()?.items; track $index) {
                     <div class="row" [ngClass]="{ overdue: item.isOverdue }">
-                        <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
-                        <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
-                        <app-addbutton tooltip="Add Child Task"></app-addbutton>
-                        <app-editbutton tooltip="Edit Child Task"></app-editbutton>
-                        <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
-                        @if(item.children?.length ?? 0 > 0) {
-                            <div class="grandchildren">
-                                @for (grandchild of item.children; track $index) {
-                                    <mat-checkbox [checked]="grandchild.isCompleted"></mat-checkbox>
-                                    <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
-                                    <app-editbutton tooltip="Edit Child Task"></app-editbutton>
-                                    <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(grandchild.id, item)"></app-delete-button>
-                                }
+                        <div class="itemWrapper">
+                            <div class="column">
+                                <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
+                                <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
+                                <app-addbutton tooltip="Add Child Task"></app-addbutton>
+                                <app-editbutton tooltip="Edit Child Task"></app-editbutton>
+                                <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
                             </div>
-                        }
+                            @if(item.children?.length ?? 0 > 0) {
+                                <div class="grandchildren">
+                                    <div class="fixedWidth"></div>
+                                    @for (grandchild of item.children; track $index) {
+                                        <div class="column">
+                                            <mat-checkbox [checked]="grandchild.isCompleted"></mat-checkbox>
+                                            <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
+                                            <app-editbutton tooltip="Edit Child Task"></app-editbutton>
+                                            <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(grandchild.id, item)"></app-delete-button>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
                     </div>
                 }
             </div>
