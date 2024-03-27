@@ -29,10 +29,10 @@ namespace API.Controllers
 
       list.Items.ForEach(i =>
       {
-        i.IsOverdue = (i.DueDate < DateTime.Today);
+        i.IsOverdue = (i.DueDate < DateTime.Today) && !i.IsCompleted;
         i.Children.ForEach(c =>
         {
-           c.IsOverdue = c.DueDate < DateTime.Today;
+           c.IsOverdue = c.DueDate < DateTime.Today && !i.IsCompleted;
         });
       });
 

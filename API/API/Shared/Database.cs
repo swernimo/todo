@@ -54,15 +54,23 @@ namespace API.Shared
 
     public bool SaveChildToList(AddChildRequest request)
     {
-      TodoList parent = GetTodo(request.ParentId);
-      if (parent == null)
-      {
-        return false;
-      }
-
+      TodoList? parent = GetTodo(request.ParentId);
       if (string.IsNullOrEmpty(request.ChildToAdd.Id))
       {
         request.ChildToAdd.Id = Guid.NewGuid().ToString();
+      }
+      if (parent == null)
+      {
+        parent = GetTodoList().Where(l => l.Items.Where(c => c.Id == request.ParentId).Any()).FirstOrDefault();
+        if (parent != null)
+        {
+          TodoItem parentItem = parent.Items.Where(i => i.Id.Equals(request.ParentId)).First();
+          parentItem.Children.Add(request.ChildToAdd);
+          return true;
+        } else
+        {
+          return false;
+        }
       }
 
       parent.Items.Add(request.ChildToAdd);
