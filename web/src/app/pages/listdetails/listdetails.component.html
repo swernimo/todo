@@ -39,7 +39,7 @@
                                     <div class="fixedWidth"></div>
                                     @for (grandchild of item.children; track $index) {
                                         <div class="column">
-                                            <mat-checkbox [checked]="grandchild.isCompleted"></mat-checkbox>
+                                            <mat-checkbox [checked]="grandchild.isCompleted" (change)="completeChanged(grandchild)"></mat-checkbox>
                                             <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
                                             <app-editbutton tooltip="Edit Child Task"></app-editbutton>
                                             <app-delete-button tooltip="Delete Child Task" (deleteClicked)="deleteChildTask(grandchild.id, item)"></app-delete-button>

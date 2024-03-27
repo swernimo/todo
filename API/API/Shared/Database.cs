@@ -92,9 +92,20 @@ namespace API.Shared
     {
       TodoList? parentList = GetTodoList().Where(l => l.Items.Where(c => c.Id == item.Id).Count() > 0).FirstOrDefault();
       bool success = false;
-      if (parentList != null)
+      if (parentList == null)
       {
-        for(var i = 0; i < parentList.Items.Count; i++)
+        parentList = GetTodoList().Where(l => l.Items.Where(c => c.Children.Where(g => g.Id.Equals(item.Id)).Any()).Any()).FirstOrDefault();
+        if (parentList != null)
+        {
+          TodoItem parentItem = parentList.Items.Where(i => i.Children.Where(c => c.Id.Equals(item.Id)).Any()).First();
+          int index = parentItem.Children.FindIndex(c => c.Id.Equals(item.Id));
+          parentItem.Children[index] = item;
+          return true;
+        }
+      }
+      else
+      {
+        for (var i = 0; i < parentList.Items.Count; i++)
         {
           var child = parentList.Items[i];
           if (child.Id.Equals(item.Id))
@@ -104,7 +115,6 @@ namespace API.Shared
             break;
           }
         }
-
       }
 
       return success;
