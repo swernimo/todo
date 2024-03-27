@@ -81,16 +81,18 @@ export class AddListItemDetailsComponent implements OnInit {
       }
 
       if (this.data.isEdit) {
-
+        this.http.put<boolean>(`${this.configSrv.apiUrl}/listdetails/updateChild`, request.childToAdd)
+        .subscribe({
+          next: (success) => {
+            const dialog = this.dialog.openDialogs[0];
+            dialog.close(success);
+          }
+        });
       } else {
         this.http.post<ITodoListAddChildRequest>(`${this.configSrv.apiUrl}/listdetails/addchild`, request)
         .subscribe((response) => {
           const dialog = this.dialog.openDialogs[0];
-          if (response) {
-            dialog.close(true);
-          } else {
-            dialog.close(false);
-          }
+          dialog.close(response);
         });
       }
     }
