@@ -32,7 +32,7 @@ namespace API.Controllers
         i.IsOverdue = (i.DueDate < DateTime.Today) && !i.IsCompleted;
         i.Children.ForEach(c =>
         {
-           c.IsOverdue = c.DueDate < DateTime.Today && !i.IsCompleted;
+           c.IsOverdue = c.DueDate < DateTime.Today && !c.IsCompleted;
         });
       });
 

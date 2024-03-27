@@ -92,7 +92,6 @@ namespace API.Shared
         int count = parentList.Items.RemoveAll(c => c.Id.Equals(childId));
         return count > 0;
       }
-      return false;
     }
 
     public bool UpdateChildTask(TodoItem item)

@@ -25,9 +25,9 @@
         } @else {
             <div class="table">
                 @for (item of list()?.items; track $index) {
-                    <div class="row" [ngClass]="{ overdue: item.isOverdue }">
+                    <div class="row">
                         <div class="itemWrapper">
-                            <div class="column">
+                            <div class="column"  [ngClass]="{ overdue: item.isOverdue }">
                                 <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
                                 <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
                                 <app-addbutton tooltip="Add Child Task" (addClicked)="addChild(item.id)"></app-addbutton>
@@ -38,7 +38,7 @@
                                 <div class="grandchildren">
                                     <div class="fixedWidth"></div>
                                     @for (grandchild of item.children; track $index) {
-                                        <div class="column">
+                                        <div class="column"  [ngClass]="{ overdue: grandchild.isOverdue }">
                                             <mat-checkbox [checked]="grandchild.isCompleted" (change)="completeChanged(grandchild)"></mat-checkbox>
                                             <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
                                             <app-editbutton tooltip="Edit Task"></app-editbutton>

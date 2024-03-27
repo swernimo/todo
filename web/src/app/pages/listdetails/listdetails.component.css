@@ -65,10 +65,6 @@
                     text-overflow: ellipsis;
                 }
 
-                &.overdue {
-                    background-color: var(--error-red);
-                }
-
                 .itemWrapper {
                     display: flex;
                     flex-direction: column;
@@ -82,5 +78,9 @@
                 }
             }
         }
+    }
+    
+    .overdue {
+        background-color: var(--error-red);
     }
 }
