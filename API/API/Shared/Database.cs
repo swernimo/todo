@@ -106,6 +106,10 @@ namespace API.Shared
           TodoItem parentItem = parentList.Items.Where(i => i.Children.Where(c => c.Id.Equals(item.Id)).Any()).First();
           int index = parentItem.Children.FindIndex(c => c.Id.Equals(item.Id));
           parentItem.Children[index] = item;
+          if (parentItem.Children.All(c => c.IsCompleted))
+          {
+            parentItem.IsCompleted = true;
+          }
           return true;
         }
       }
@@ -120,6 +124,11 @@ namespace API.Shared
             success = true;
             break;
           }
+        }
+
+        if (parentList.Items.All(c => c.IsCompleted))
+        {
+          parentList.IsClosed = true;
         }
       }
 
