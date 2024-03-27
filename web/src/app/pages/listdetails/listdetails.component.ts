@@ -88,7 +88,8 @@ export class ListdetailsComponent implements OnInit {
       height: '350px',
       width: '300px',
       data: {
-        parentId: id
+        parentId: id,
+        isEdit: false
       }
     });
 
@@ -135,5 +136,32 @@ export class ListdetailsComponent implements OnInit {
         }
       }
     });
+  }
+
+  public editItem(todoItem: ITodoItem, parentId?: string): void {
+    if (this.addItemDialogRef) {
+      this.addItemDialogRef.close();
+    }
+    
+    this.addItemDialogRef = this.dialog.open(AddListItemDetailsComponent, {
+      height: '350px',
+      width: '300px',
+      data: {
+        isEdit: true,
+        editItem: todoItem,
+        parentId: parentId ?? this.listId()
+      }
+    });
+
+    this.addItemDialogRef.afterClosed()
+    .subscribe((refresh) => {
+      if (refresh) {
+        this.loadDetails();
+      }
+    });
+  }
+
+  public editList(): void {
+    console.log('edit list');
   }
 }
