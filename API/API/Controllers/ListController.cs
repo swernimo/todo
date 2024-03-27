@@ -63,5 +63,12 @@ namespace API.Controllers
       bool success = _db.ClearAllLists();
       return Ok(success);
     }
+
+    [HttpPut]
+    public IActionResult Update([FromBody] TodoList list)
+    {
+      bool success = _db.UpdateList(list);
+      return Ok(success);
+    }
   }
 }

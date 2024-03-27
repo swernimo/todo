@@ -125,5 +125,23 @@ namespace API.Shared
 
       return success;
     }
+
+    public bool UpdateList(TodoList list)
+    {
+      bool success = false;
+
+      if (list != null)
+      {
+        TodoList orgList = GetTodo(list.Id);
+
+        if (orgList != null)
+        {
+          orgList.Name = list.Name;
+          success = true;
+        }
+      }
+
+      return success;
+    }
   }
 }
