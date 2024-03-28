@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'API/'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build */**/API.sln --configuration Release
+        run: dotnet build ../API/API.sln --configuration Release
 
       - name: dotnet publish
         run: dotnet publish  */**/API.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp
