@@ -5,6 +5,20 @@
     flex-direction: column;
     align-self: center;
 
+    div {
+        margin: 0.5vh 0;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        
+        span {
+            font-weight: bold;
+            font-size: 16px;
+        }
+    }
+
     .footer {
         display: flex;
         flex-direction: row;

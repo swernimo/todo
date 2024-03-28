@@ -15,7 +15,12 @@
                     <span class="material-symbols-outlined" (click)="navigateToDetails(list.id)">
                         chevron_right
                     </span>
-                    <span (click)="navigateToDetails(list.id)">{{ list.name }}</span>
+                    <span (click)="navigateToDetails(list.id)">
+                        {{ list.name }}
+                        @if(list.isClosed) {
+                            <span> (Completed)</span>
+                        }
+                    </span>
                     <app-delete-button (deleteClicked)="deleteList(list.id)" tooltip="Delete List"></app-delete-button>
                 </div>
             </div>

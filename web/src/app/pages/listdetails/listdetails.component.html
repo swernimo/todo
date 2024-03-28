@@ -10,7 +10,7 @@
                 <span>
                     {{ listName() }}
                     @if(isClosed()) {
-                        (closed)
+                        (Completed)
                     }
                 </span>
             }
@@ -34,19 +34,23 @@
                             <div class="column"  [ngClass]="{ overdue: item.isOverdue }">
                                 <mat-checkbox [checked]="item.isCompleted" (change)="completeChanged(item)"></mat-checkbox>
                                 <span [matTooltip]="item.details ?? ''">{{ item.name }}</span>
-                                <app-addbutton tooltip="Add Child Task" (addClicked)="addChild(item.id)"></app-addbutton>
-                                <app-editbutton tooltip="Edit Task" (editBtnClicked)="editItem(item)"></app-editbutton>
-                                <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
+                                <div class="actionButtons">
+                                    <app-addbutton tooltip="Add Child Task" (addClicked)="addChild(item.id)"></app-addbutton>
+                                    <app-editbutton tooltip="Edit Task" (editBtnClicked)="editItem(item)"></app-editbutton>
+                                    <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(item.id)"></app-delete-button>
+                                </div>
                             </div>
                             @if(item.children?.length ?? 0 > 0) {
                                 <div class="grandchildren">
-                                    <div class="fixedWidth"></div>
                                     @for (grandchild of item.children; track $index) {
                                         <div class="column"  [ngClass]="{ overdue: grandchild.isOverdue }">
+                                            <div class="fixedWidth"><span></span></div>
                                             <mat-checkbox [checked]="grandchild.isCompleted" (change)="completeChanged(grandchild)"></mat-checkbox>
                                             <span [matTooltip]="grandchild.details ?? ''">{{ grandchild.name }}</span>
-                                            <app-editbutton tooltip="Edit Task" (editBtnClicked)="editItem(grandchild, item.id)"></app-editbutton>
-                                            <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(grandchild.id)"></app-delete-button>
+                                            <div class="actionButtons">
+                                                <app-editbutton tooltip="Edit Task" (editBtnClicked)="editItem(grandchild, item.id)"></app-editbutton>
+                                                <app-delete-button tooltip="Delete Task" (deleteClicked)="deleteChildTask(grandchild.id)"></app-delete-button>
+                                            </div>
                                         </div>
                                     }
                                 </div>

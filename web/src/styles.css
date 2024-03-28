@@ -1,18 +1,36 @@
 :root {
     --text-gray: #737370;
     --white: #fff;
-    --branding-blue: #687BDF;
+    --branding-blue: #687CDE;
     --required-blue: #1BD0E0;
     --error-red: #E6180A;
     --valid-green: #25EB13;
     --background-gray: #E2E2E2;
-    --background-hover: #6E6E6E;
+    --background-hover: #C5C5C5;
+    --border-color: #6E6E6E;
+    --border-radius: 3px;
+    --border-thickness: 1px;
+    --icon-color: var(--text-gray);
+    --button-disabled-color: #242B4C;
+    --cancel-color: #72799E;
+
+    /*
+        Overriding Angular Material Styles        
+    */
+    --mdc-checkbox-selected-icon-color: var(--branding-blue);
+    --mdc-checkbox-selected-pressed-icon-color: var(--branding-blue);
+    --mdc-checkbox-selected-hover-icon-color: var(--branding-blue);
+    --mdc-checkbox-selected-focus-icon-color: var(--branding-blue);
+    --mdc-checkbox-selected-focus-state-layer-color: var(--branding-blue);
+    --mdc-checkbox-selected-hover-state-layer-color: var(--branding-blue);
+    --mdc-checkbox-selected-pressed-state-layer-color: var(--branding-blue);
+    --mdc-checkbox-selected-checkmark-color: var(--white);
 }
 
 body {
     background-color: var(--background-gray);
     
-    span, * {
+    span {
         color: var(--text-gray);
     }
 }
@@ -20,6 +38,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .icon {
+    color: var(--icon-color);
+
     &:hover {
         cursor: pointer;
         color: var(--white);

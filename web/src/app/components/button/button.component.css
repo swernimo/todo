@@ -2,8 +2,27 @@
 
 .buttonWrapper {
     button {
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        color: var(--white);
+        border: none;
+
         &:disabled {
             cursor: not-allowed;
+        }
+
+        &.cancel {
+            background-color: var(--cancel-color);
+        }
+
+        &.primary {
+            background-color: var(--branding-blue);
+
+            &:disabled {
+                background-color: var(--button-disabled-color);
+                color: var(--text-gray);
+                cursor: not-allowed;
+            }
         }
     }
 }

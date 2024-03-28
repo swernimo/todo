@@ -20,9 +20,13 @@
 
         .buttons {
             display: flex;
-            margin-right: 1vw;
+            margin-right: 2vw;
             width: 5vw;
             justify-content: space-between;
+
+            * {
+                margin-left: 0.5vw;
+            }
         }
     }
 
@@ -74,6 +78,21 @@
                         display: flex;
                         flex-direction: row;
                         align-items: center;
+                        border: var(--border-thickness) solid var(--border-color);
+                        border-radius: var(--border-radius);
+                        margin: 0.5vh 0;
+                        width: 35vw;
+
+                        .actionButtons {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            justify-content: end;
+
+                            * {
+                                margin-left: 0.5vw;
+                            }
+                        }
                     }
                 }
             }
@@ -81,6 +100,12 @@
     }
     
     .overdue {
-        background-color: var(--error-red);
+        background-color: var(--background-hover);
+        --border-color: var(--error-red);
+        --mdc-checkbox-unselected-icon-color: var(--error-red);
+
+        span {
+            color: var(--error-red);
+        }
     }
 }

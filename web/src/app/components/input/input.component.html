@@ -9,12 +9,14 @@
             </mat-form-field>
         }
     } @else if (type === 'textarea') {
-        <textarea [formControl]="formCtrl" [placeholder]="placeholder"></textarea>
+        <mat-form-field>
+            <mat-label>{{ title }}</mat-label>
+            <textarea matInput [placeholder]="placeholder" [formControl]="formCtrl" (blur)="inputOnBlur()"  [value]="formCtrl.value"></textarea>
+        </mat-form-field>
     } @else if (type === 'date') {
         <mat-form-field>
             <mat-label>Due Date</mat-label>
             <input matInput [matDatepicker]="picker" [formControl]="formCtrl" (blur)="inputOnBlur()">
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

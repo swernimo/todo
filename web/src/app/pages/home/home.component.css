@@ -26,22 +26,29 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
+            margin: 0.5vh 0;
 
             .listItem {
                 display: flex;
                 flex-direction: row;
-                width: 30vw;
                 justify-content: space-between;
                 height: 5vh;
                 align-items: center;
                 width: 50vw;
+                border: var(--border-thickness) solid var(--border-color);
+                border-radius: var(--border-radius);
 
                 &:hover {
                     cursor: pointer;
                     background-color: var(--background-hover);
+                    --icon-color: var(--white);
 
                     span {
                         color: var(--white);
+                    }
+
+                    app-delete-button {
+                        color: red;
                     }
                 }
             }

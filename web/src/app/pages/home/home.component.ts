@@ -42,8 +42,8 @@ export class HomeComponent implements OnInit {
       this.addListDialogRef.close();
     }
     this.addListDialogRef = this.dialog.open(AddListModalComponent, {
-      width: '450px',
-      height: '200px',
+      width: '300px',
+      height: '175px',
       data: {
         dialogRef: this.addListDialogRef
       }
