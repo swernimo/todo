@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'web/**'
+    # paths:
+    #   - 'web/**'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
