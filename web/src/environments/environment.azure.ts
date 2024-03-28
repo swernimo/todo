@@ -1,5 +1,5 @@
 
 export const environment = {
 	production: false,
-    apiUrl: 'https://localhost:44324/api',
+    apiUrl: 'https://tbstodo.azurewebsites.net/api',
 };
