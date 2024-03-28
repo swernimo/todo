@@ -31,7 +31,7 @@ namespace API.Shared
         return false;
       }
 
-      TodoList list = _todos.Find(l => l.Id.Equals(idToDelete));
+      TodoList? list = _todos.Find(l => l.Id.Equals(idToDelete));
       if (list == null)
       {
         return false;

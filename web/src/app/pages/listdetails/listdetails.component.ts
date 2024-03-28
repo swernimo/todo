@@ -61,7 +61,7 @@ export class ListdetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.currentRoute.params.subscribe((p) => {
+      this.currentRoute.params?.subscribe((p) => {
         if (p['id']) {
           this.listId.set(p['id']);
           this.loadDetails();
