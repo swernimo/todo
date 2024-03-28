@@ -50,8 +50,8 @@
               "outputHashing": "all",
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environments.ts",
-                  "with": "src/environments/environments.azure.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.azure.ts"
                 }
               ]
             },
